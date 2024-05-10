@@ -1,0 +1,79 @@
+@startuml TDG
+
+class Jugador{
+    -nombre : string
+    +TerminarPartida(muerte : base) : int
+}
+class Torre{
+    -daño : float
+    -velocidadDeDisparo : int
+    +Disparar() : int
+}
+class Base{
+    -vida : int
+    +Morir(daño : Enemigo) : int
+}
+class Enemigo{
+    -vida : float
+    -armadura : float
+    -daño : int
+    +Dañar() : int
+}
+class Mapa{
+    -diseño : int
+    -numDeEspacios : EspacioDeEdificio
+    +PosisionarBase() : 
+    +PosisionarTorre() : 
+}
+class EspacioDeEdificio{
+    -posicionEnMapa : int
+}
+package ClasificacionDeEspacios{
+class EspacioDeTorre{
+    -torre : char
+    -tamaño : int
+    +SeleccionarTorre() : 
+}
+class EspacioDeBase{
+    -tamaño : int
+}
+}
+package TorresEspeciales{
+    class TorreRoja{
+        -letraDeTorre : char
+        -aumentoDeVelocidad : int
+        +Miltidisparar() : void
+    }
+    class TorreAmarilla{
+        -letraDeTorre : char
+        -aumentoDeAlcance : int
+        +EncenderElSuelo() : void
+    }
+    class TorreMorada{
+        -letraDeTorre : char
+        -penetracionDeArmadura : int
+        +ReducirVelocidad() : void
+    }
+}
+class Municion{
+    -dañoDeTorre : float
+    -penetracion : float
+    +Dañar() : void
+}
+
+
+TorreRoja --|> Torre
+TorreAmarilla --|> Torre
+TorreMorada --|> Torre
+EspacioDeTorre --|> EspacioDeEdificio
+EspacioDeBase --|> EspacioDeEdificio
+Jugador *-- Base
+Base o-- Enemigo
+Enemigo o-- Municion
+Torre *-- Municion
+Mapa *-- EspacioDeEdificio
+Jugador o-- Mapa
+EspacioDeBase *-- Base
+EspacioDeTorre *-- Torre
+
+@enduml 
