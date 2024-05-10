@@ -60,6 +60,9 @@ class Municion{
     -penetracion : float
     +Dañar() : void
 }
+class MenuDeEspacios{
+
+}
 
 
 TorreRoja --|> Torre
@@ -71,9 +74,11 @@ Jugador *-- Base
 Base o-- Enemigo
 Enemigo o-- Municion
 Torre *-- Municion
-Mapa *-- EspacioDeEdificio
+MenuDeEspacios o-- EspacioDeEdificio
 Jugador o-- Mapa
 EspacioDeBase *-- Base
 EspacioDeTorre *-- Torre
+Mapa *-- MenuDeEspacios
+
 
 @enduml 
