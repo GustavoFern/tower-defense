@@ -70,15 +70,15 @@ TorreAmarilla --|> Torre
 TorreMorada --|> Torre
 EspacioDeTorre --|> EspacioDeEdificio
 EspacioDeBase --|> EspacioDeEdificio
-Jugador *-- Base
-Base o-- Enemigo
-Enemigo o-- Municion
-Torre *-- Municion
-MenuDeEspacios o-- EspacioDeEdificio
-Jugador o-- Mapa
-EspacioDeBase *-- Base
-EspacioDeTorre *-- Torre
-Mapa *-- MenuDeEspacios
+Jugador "1" *-- "1" Base
+Base "1" o-- "*" Enemigo
+Enemigo "1" o-- "*" Municion
+Torre "1" *-- "1" Municion
+MenuDeEspacios "1" o-- "*" EspacioDeEdificio
+Jugador "1" o-- "*" Mapa
+EspacioDeBase "1" *-- "1" Base
+EspacioDeTorre "1" *-- "1" Torre
+Mapa "1" *-- "1" MenuDeEspacios
 
 
 @enduml 
