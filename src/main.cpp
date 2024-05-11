@@ -1,27 +1,51 @@
-#include <iostream> //Flujos estrada y salida
-#include <ftxui/screen/screen.hpp>
+#include <iostream>
 #include <ftxui/dom/elements.hpp>
-#include <thread>  //Hilos de prosesos
-#include <fstream> //Flujos de archivos
-#include <string>  //Control de cadenas
+#include <ftxui/screen/screen.hpp>
+#include <string>
+#include <fstream>
+#include <thread>
+#include <chrono>
+#include <Nivel.hpp>
 
 using namespace std;
 using namespace ftxui;
 
-int main(int argc, char const *argv[])
+int main()
 {
-    int fotograma = 0;
+    Nivel N;
+    int x = 0, i, t, y = 6;
+    Screen pantalla = Screen::Create(Dimension::Full());
     while (true)
     {
-        this_thread::sleep_for(0.1s);
-        fotograma++;
-        Element personaje = spinner(21, fotograma) | bold | color(Color::Red) | bgcolor(Color::White);
-        Element dibujo = hbox({personaje});
-        Screen pantalla = Screen::Create(Dimension::Full());
-        Render(pantalla, dibujo);
-        pantalla.Print();
-        cout << pantalla.ResetPosition();
+        x = 0;
+        y = 6;
+        for (i = 0; i < 67; i++)
+        {
+            if (x > 39 && y < 16)
+            {
+                this_thread::sleep_for(chrono::milliseconds(500));
+                Element DNivel = N.DibujarNivel();
+                Render(pantalla, DNivel);
+                pantalla.PixelAt(x, y).character = " .-. ";
+                pantalla.PixelAt(x, y + 1).character = "(o.o)";
+                pantalla.PixelAt(x, y + 2).character = " |=| ";
+                pantalla.Print();
+                y++;
+                pantalla.Clear();
+            }
+            else
+            {
+                this_thread::sleep_for(chrono::milliseconds(500));
+                Element DNivel = N.DibujarNivel();
+                Render(pantalla, DNivel);
+                pantalla.PixelAt(x, y).character = " .-. ";
+                pantalla.PixelAt(x, y + 1).character = "(o.o)";
+                pantalla.PixelAt(x, y + 2).character = " |=| ";
+                pantalla.Print();
+                x++;
+                pantalla.Clear();
+            }
+        }
     }
-
-    return EXIT_SUCCESS;
+    return 0;
 }
